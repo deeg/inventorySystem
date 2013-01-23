@@ -1,0 +1,3 @@
+{
+  "autorun":["views", "dal", "middleware", "params", "routes"]
+}

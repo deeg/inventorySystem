@@ -1,0 +1,96 @@
+
+.sidebar-nav-fixed {
+    padding: 9px 0;
+    position:fixed;
+    left:20px;
+    top:60px;
+    width:250px;
+}
+
+.row-fluid > .span-fixed-sidebar {
+    margin-left: 290px;
+}
+
+@media (min-width: 768px) {
+    .sb-fixed{
+        position: fixed;
+    }
+}
+
+
+.hidden {
+    display: none !important;
+}
+
+.inline{
+    display:inline;
+}
+
+.block{
+    display:block;
+}
+
+.mainAttribute{
+    display:inline;
+    padding-right:15px;
+}
+.attribute{
+    display:block;
+    padding-bottom: 10px;
+    padding-right: 15px;
+}
+
+#addItemTitle{
+    display: block;
+    padding-bottom: 10px;
+}
+
+.form-horizontal .control-label {
+    width: 150px;
+}
+
+.form-horizontal .controls {
+    margin-left: 170px;
+}
+
+.attributeTitle{
+    font-size: 15px;
+    font-family: Helvetica;
+}
+
+ul.nav li.dropdown:hover ul.dropdown-menu{
+    display: block;
+}
+
+.soldOut{
+    color: #b22222;
+}
+.soldOut:hover{
+    color: #8b0000;
+    text-decoration: underline;
+}
+
+div[class*="attributeEdit"]{
+
+
+}
+.editButtons{
+    padding-top: 15px;
+}
+
+div[class*="attributeContent"], div[class*="attributeEdit"]{
+
+}
+
+
+.qrCodeImage.selected{
+    border:25px solid #228b22;
+}
+.qrCodeImage{
+    border:25px solid #ffffff;
+}
+
+.splashContent{
+    width: 500px;
+    padding-bottom: 15px;
+}

@@ -1,0 +1,203 @@
+{{!< layouts/default}}
+<script>
+    $(document).ready(function(){
+        if($('.accordion-group').size() < 2){
+            $('.accordion-body').addClass('in');
+        }
+    })
+</script>
+{{#success}}
+<div class="message">
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Success:</strong> Item successfully {{successType}}.
+    </div>
+</div>
+{{/success}}
+<div class="label">
+    Inventory:
+</div>
+
+<div id="inventoryWrapper" class="container-fluid">
+    <div class="accordion" id="inventoryListings">
+        {{#items}}
+        <div class="accordion-group" id="item-{{_id}}">
+            <div class="accordion-heading">
+                <a class="accordion-toggle collapsed {{#if soldOut}}soldOut{{/if}} {{#if lowOnInventory}}lowOnInventory{{/if}}" data-toggle="collapse" data-target="#collapse-{{_id}}" href="javascript:void(0)">
+                    {{#if itemId}} <div class="mainAttribute"><strong>ID:</strong> {{itemId}}</div>{{/if}}
+                    <div class="mainAttribute"><strong>Type:</strong> {{type}}</div>
+                    {{#if size}} <div class="mainAttribute"><strong>Size:</strong> {{size}}</div>{{/if}}
+                    {{#if color}}<div class="mainAttribute"><strong>Color:</strong> {{color}}</div>{{/if}}
+                    {{#if material}}<div class="mainAttribute"><strong>Material:</strong> {{material}}</div>{{/if}}
+                    {{#if quantity}}<div class="mainAttribute"><strong>Quantity:</strong> {{quantity}}</div>{{/if}}
+                </a>
+            </div>
+            <div id="collapse-{{_id}}" class="accordion-body collapse">
+                <div class="accordion-inner">
+                    <div class="row-fluid" style="padding-top: 10px">
+                        <div class="span2" style="padding-right:10px">
+                            <div class="picture">
+                                <img src="/img/itemImages/{{_id}}" width="150px"onerror="this.onerror=null; this.src='/img/lpk.jpg'"/>
+                            </div>
+                            <div class="sellButtons">
+                                <button id="sellButton-{{_id}}" class="btn btn-success btn-block" onclick="Item.toggleSell('{{_id}}');">Sell</button>
+                                <button class="btn btn-success attributeSell-{{_id}} hidden" onclick="Item.sellItem('{{_id}}')">Process Sale</button>
+                            </div>
+                            <div class="editButtons" style="padding-top: 5px">
+                                <button id="editButton-{{_id}}" class="btn btn-warning btn-block" onclick="Item.toggleEdit('{{_id}}');">Edit</button>
+                                <button class="btn btn-success attributeEdit-{{_id}} hidden" onclick="Item.updateItem(Item.buildInputMap('itemEditAttribute-{{_id}}'), '{{_id}}')">Update</button>
+                            </div>
+                            <div class="deleteButtons" style="padding-top: 5px">
+                                <button id="deleteButton-{{_id}}" class="btn btn-danger btn-block" onclick="Item.deleteItem('{{_id}}');">Delete</button>
+                            </div>
+                        </div>
+                        <div class="attributeWrapper">
+                            <div class="span3 offset2">
+                                <div class="attribute">
+                                    <span class="attributeTitle"><strong>Type:</strong></span>
+                                    <div class="attributeContent-{{_id}}">{{type}}</div>
+                                    <div class="attributeEdit-{{_id}} hidden"><input name="type" class="itemEditAttribute-{{_id}}" type="text" value="{{type}}"/></div>
+                                </div>
+                                <div class="attribute">
+                                    <span class="attributeTitle"><strong>Size:</strong></span>
+                                    <div class="attributeContent-{{_id}}">{{size}}</div>
+                                    <div class="attributeEdit-{{_id}} hidden"><input name="size" class="itemEditAttribute-{{_id}}" type="text" value="{{size}}"/></div>
+                                </div>
+                                <div class="attribute">
+                                    <span class="attributeTitle"><strong>Material:</strong></span>
+                                    <div class="attributeContent-{{_id}}">{{material}}</div>
+                                    <div class="attributeEdit-{{_id}} hidden"><input name="material" class="itemEditAttribute-{{_id}}" type="text" value="{{material}}"/></div>
+                                </div>
+                                <div class="attribute">
+                                    <span class="attributeTitle"><strong>Color:</strong></span>
+                                    <div class="attributeContent-{{_id}}">{{color}}</div>
+                                    <div class="attributeEdit-{{_id}} hidden"><input name="color" class="itemEditAttribute-{{_id}}" type="text" value="{{color}}"/></div>
+                                </div>
+                                <div class="attribute">
+                                    <span class="attributeTitle"><strong>Consigner:</strong></span>
+                                    <div class="attributeContent-{{_id}}">{{consigner}}</div>
+                                    <div class="attributeEdit-{{_id}} hidden"><input name="consigner" class="itemEditAttribute-{{_id}}" type="text" value="{{consigner}}"/></div>
+                                </div>
+                                <div class="attribute">
+                                    <span class="attributeTitle"><strong>Gender:</strong></span>
+                                    <div class="attributeContent-{{_id}}" name="gender">{{gender}}</div>
+                                    <div class="attributeEdit-{{_id}} hidden">
+                                        <select name="gender" class="itemEditAttribute-{{_id}}" type="select">
+                                        <option value=""></option>
+                                        <option value="Maile">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Neutral">Neutral</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="attribute">
+                                    <span class="attributeTitle"><strong>Point Of Purchase:</strong></span>
+                                    <div class="attributeContent-{{_id}}">{{pointOfPurchase}}</div>
+                                    <div class="attributeEdit-{{_id}} hidden"><input name="pointOfPurchase" class="itemEditAttribute-{{_id}}" type="text" value="{{pointOfPurchase}}"/></div>
+                                </div>
+                                <div class="attribute">
+                                    <span class="attributeTitle"><strong>Purchase Date:</strong></span>
+                                    <div class="attributeContent-{{_id}}" name="purchaseDate">{{purchaseDate}}</div>
+                                    <div class="attributeEdit-{{_id}} hidden"><input name="purchaseDate" class="itemEditAttribute-{{_id}}" type="date" value="{{purchaseDate}}"/></div>
+                                </div>
+                                <div class="attribute">
+                                    <span class="attributeTitle"><strong>Description:</strong></span>
+                                    <div class="attributeContent-{{_id}}">{{description}}</div>
+                                    <div class="attributeEdit-{{_id}} hidden"><input name="description" class="itemEditAttribute-{{_id}}" type="text" value="{{description}}"/></div>
+                                </div>
+                                <div class="attribute">
+                                    <div class="attributeContent-{{_id}}">
+                                        <span class="attributeTitle"><strong>On Cart:</strong></span>
+                                        {{#if onCart}}<i class="icon-ok"></i>{{else}}}<i class="icon-remove"></i>{{/if}}
+                                        <span class="attributeTitle"><strong>On Etsy:</strong></span>
+                                        {{#if onEtsy}}<i class="icon-ok"></i>{{else}}}<i class="icon-remove"></i>{{/if}}
+                                        <span class="attributeTitle"><strong>At SOWA:</strong></span>
+                                        {{#if onSowa}}<i class="icon-ok"></i>{{else}}}<i class="icon-remove"></i>{{/if}}</div>
+                                    <div class="attributeEdit-{{_id}} hidden">
+                                        <div class="block">
+                                            <label class="chcekbox inline">On Cart
+                                                <input type="checkbox" class="itemEditAttribute-{{_id}}" name="onCart" value="{{onCart}}"></label>
+
+                                            <label class="chcekbox inline">On Etsy
+                                                <input type="checkbox" class="itemEditAttribute-{{_id}}" name="onEtsy" value="{{onEtsy}}"></label>
+
+                                            <label class="chcekbox inline">At SOWA
+                                                <input type="checkbox" class="itemEditAttribute-{{_id}}" name="onSowa" value="{{onSowa}}"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span3 offset5">
+                                <div class="attribute">
+                                    <span class="attributeTitle"><strong>Cost:</strong></span>
+                                    <div class="attributeContent-{{_id}}">{{cost}}</div>
+                                    <div class="attributeEdit-{{_id}} hidden"><input name="cost" class="itemEditAttribute-{{_id}}" onchange="Item.calculateMargin('{{_id}}}');" type="text" value="{{cost}}"/></div>
+                                </div>
+                                <div class="attribute">
+                                    <span class="attributeTitle"><strong>Asking Price:</strong></span>
+                                    <div class="attributeContent-{{_id}}">{{askingPrice}}</div>
+                                    <div class="attributeEdit-{{_id}} hidden"><input name="askingPrice" class="itemEditAttribute-{{_id}}" type="text" value="{{askingPrice}}"/></div>
+                                </div>
+                                <div class="attribute">
+                                    <span class="attributeTitle"><strong>Baseline Price:</strong></span>
+                                    <div class="attributeContent-{{_id}}">{{baselineSalePrice}}</div>
+                                    <div class="attributeEdit-{{_id}} hidden"><input name="baselineSalePrice" class="itemEditAttribute-{{_id}}" type="text" value="{{baselineSalePrice}}"/></div>
+                                </div>
+                                <div class="attribute">
+                                    <span class="attributeTitle"><strong>Average Sale Price:</strong></span>
+                                    <div>${{averageSalePrice}}</div>
+                                </div>
+                                <div class="attribute">
+                                    <span class="attributeTitle"><strong>Average Margin:</strong></span>
+                                    <div>${{margin}}</div>
+                                </div>
+                                <div class="attribute">
+                                    <span class="attributeTitle"><strong>Quantity:</strong></span>
+                                    <div class="attributeContent-{{_id}}">{{quantity}}</div>
+                                    <div class="attributeEdit-{{_id}} hidden"><input name="quantity" class="itemEditAttribute-{{_id}}"  type="number" min="1 " hardValue="{{quantity}}" value="{{quantity}}"/></div>
+                                </div>
+                                <div class="attribute">
+                                    <span class="attributeTitle"><strong>Units Sold:</strong></span>
+                                    <div>{{unitsSold}}</div>
+                                </div>
+                                <div class="attribute">
+                                    <span class="attributeTitle"><strong>Total Sales:</strong></span>
+                                    <div>${{totalSales}}</div>
+                                </div>
+                                <div class="attribute">
+                                    <span class="attributeTitle"><strong>Sale Date:</strong></span>
+                                    <div class="attributeContent-{{_id}}" name="saleDate">{{saleDate}}</div>
+                                </div>
+                                <div class="attribute">
+                                    <div class="attributeContent-{{_id}}">
+                                        <span class="attributeTitle"><strong>Sold Out:</strong></span>
+                                        {{#if soldOut}}<i class="icon-ok"></i>{{else}}<i class="icon-remove"></i>{{/if}}</div>
+                                    <div class="attributeSell-{{_id}} hidden">
+                                        <span class="attributeTitle"><strong>Sold:</strong></span>
+                                        <input name="unitsSold" type="number" min="1" class="input-mini itemSellAttribute-{{_id}}" />
+                                        <div class="input-prepend">
+                                            <span class="add-on">$</span>
+                                            <input name="salePrice" type="text" class="input-mini itemSellAttribute-{{_id}}" placeholder="0.00"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span4 offset8">
+                            <div class="attribute qrCode" for="{{_id}}" onclick="$(this).toggleClass('generateLabel'); $(this).children('.qrCodeImage').toggleClass('selected');">
+                                <span class="attributeTitle"><strong>QR Code</strong></span>
+                                <img src="https://chart.googleapis.com/chart?cht=qr&chs=100x100&chl=http://deeg.bounceme.net/update/{{_id}}" class="qrCodeImage"/>
+                            </div>
+                            <form method="post" enctype="multipart/form-data" action="/file-upload">
+                                <input class="hidden" type="text" name="id" value="{{_id}}">
+                                <input type="file" name="picture">
+                                <input type="submit">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/items}}
+    </div>
+</div>

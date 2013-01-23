@@ -1,0 +1,85 @@
+<html>
+<head>
+    <title>{{title}}</title>
+    {{> css}}
+    {{> scripts}}
+    {{{block "pageStyles"}}}
+</head>
+<body>
+<script>
+    $(document).ready(function(){
+        $('#addItem').on('click', function(){
+            $('#queryItemContainer').hide(Item.clearForm);
+            $('#addItemContainer').toggle('slow', Item.clearForm);
+            $('.itemAttribute[name=purchaseDate]').val(Item.getTodaysDate());
+            $('#aboveWells').focus();
+        })
+        $('#queryItem').on('click', function(){
+            $('#addItemContainer').hide(Item.clearForm);
+            $('#queryItemContainer').toggle('slow', Item.clearForm);
+            $('#aboveWells').focus();
+        })
+
+    });
+</script>
+<div class="navbar navbar-static-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="brand" href="#">Le Pants King Inventory</a>
+            <ul class="nav nav-tabs">
+                <li>
+                    <a href="/login">Login</a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="/inventory">
+                        Inventory
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/inventory">All Inventory</a></li>
+                        <li><a href="/inventory/forsale">For Sale</a></li>
+                        <li><a href="/inventory/soldout">Sold Out</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/inventory/oncart">On Cart</a></li>
+                        <li><a href="/inventory/onetsy">On Etsy</a></li>
+                        <li><a href="/inventory/atsowa">At SOWA</a></li>
+
+                    </ul>
+                </li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span2">
+            <div class="well sidebar-nav-fixed">
+                <ul class="nav nav-list" rel="popover">
+                    <li><a href="#aboveWells" id="addItem"><i class="icon-chevron-right"></i>Add Item</a></li>
+                </ul>
+                <ul class="nav nav-list" rel="popover">
+                    <li><a href="#aboveWells" id="queryItem"><i class="icon-chevron-right"></i>Query Item</a></li>
+                </ul>
+                <ul class="nav nav-list" rel="popover">
+                    <li><a href="javascript:void(0)" id="generateLabels" onclick="Item.generateLabels();"><i class="icon-chevron-right"></i>Generate Labels</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="span10" id="contentColumns">
+            <div id="#aboveWells"></div>
+            <div class="well" style="display:none;" id="addItemContainer">
+                {{> addItemModal}}
+            </div>
+            <div class="well" style="display:none;" id="queryItemContainer">
+                {{> queryItem}}
+            </div>
+            <div id="bodyWrapper">
+                {{{body}}}
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

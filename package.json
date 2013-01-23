@@ -1,0 +1,44 @@
+{
+    "name": "base12app",
+    "version": "0.0.1",
+    "directories": {},
+    "engines": {
+        "node": ">=0.6.6",
+        "npm": ">=1.1"
+    },
+    "dependencies": {
+        "base12": "0.3.1",
+        "express": "latest",
+        "connect": "2.0.3",
+        "connect-timeout": "latest",
+        "mongodb": "latest",
+        "connect-mongodb": "latest",
+        "mongoose":"latest",
+        "strobe": "latest",
+        "async": "latest",
+        "express-hbs": "latest",
+        "less":"latest",
+        "bcrypt":"latest",
+        "passport":"latest",
+        "passport-local":"latest",
+        "underscore":"latest",
+        "fs":"latest",
+        "handlebars-precompiler":"latest"
+    },
+    "devDependencies": {
+        "handlebars": "latest",
+        "vows": "latest",
+        "commander": "latest"
+    },
+    "scripts": {
+        "start": "./run",
+        "lock": "scripts/module_lock.js",
+        "postinstall": "scripts/postinstall",
+        "test": "vows test/*.vows.js"
+    },
+    "constants": {
+        "title": "base12 app",
+        "session_length": 1209600000,
+        "request_timeout": 10000
+    }
+}

@@ -1,0 +1,78 @@
+<div id="queryItemTitle">
+    <h3>Query Item:</h3>
+</div>
+<div id="queryItemFailure" class="hidden">
+    <div class="alert">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Error:</strong> There was a problem querying the item.
+    </div>
+</div>
+<form action="javascript:void(0)">
+    <fieldset>
+        <div class="row-fluid">
+            <div class="span3">
+                <label>Type</label>
+                <input type="text" class="itemAttribute" required="required" placeholder="Type description" name="type"/>
+
+                <label>Consigner</label>
+                <input type="text" class="itemAttribute" placeholder="Consigner name" name="consigner">
+
+                <label>Size</label>
+                <input type="text" class="itemAttribute" placeholder="Large" name="size"/>
+
+                <label>Color</label>
+                <input type="text" class="itemAttribute" placeholder="Red" name="color"/>
+
+                <label>Gender</label>
+                <select name="gender" class="itemAttribute">
+                    <option></option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Neutral</option>
+                </select>
+
+                <label>Material</label>
+                <input type="text" class="itemAttribute" placeholder="Polyester" name="material"/>
+
+                <label>Description</label>
+                <input type="text" class="itemAttribute" placeholder="Item Description" name="description"/>
+            </div>
+            <div class="span9">
+                <label>Cost</label>
+                $<input type="text" class="itemAttribute" placeholder="0.00" name="cost"/>
+
+                <label>Asking Price</label>
+                $<input type="text" class="itemAttribute" placeholder="0.00" name="askingPrice"/>
+
+                <label>Sale Price</label>
+                $<input type="text" class="itemAttribute" placeholder="0.00" name="salePrice"/>
+
+                <div class="block">
+                    <label class="inline">Sold?
+                        <input type="checkbox" class="itemAttribute" name="sold" value="true"></label>
+                </div>
+
+                <label>Purchase Date</label>
+                <input type="date"  class="itemAttribute" name="purchaseDate">
+
+                <label>Sale Date Date</label>
+                <input type="date"  class="itemAttribute" name="saleDate">
+
+                <div class="block">
+                    <label class="chcekbox inline">On Cart
+                        <input type="checkbox" class="itemAttribute" name="onCart"></label>
+
+                    <label class="chcekbox inline">On Etsy
+                        <input type="checkbox" class="itemAttribute" name="onEtsy"></label>
+
+                    <label class="chcekbox inline">At SOWA
+                        <input type="checkbox" class="itemAttribute" name="onSowa"></label>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>
+<div id="addItemFooter">
+    <a href="javascript:void(0)" onclick="$('#queryItemContainer').toggle('slow')" class="btn" data-dismiss="modal">Close</a>
+    <a href="javascript:void(0)" onclick="Item.query(Item.buildInputMapForQuery());" class="btn btn-primary">Query</a>
+</div>
