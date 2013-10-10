@@ -108,11 +108,11 @@
                                 <div class="attribute">
                                     <div class="attributeContent-{{_id}}">
                                         <span class="attributeTitle"><strong>On Cart:</strong></span>
-                                        {{#if onCart}}<i class="icon-ok"></i>{{else}}}<i class="icon-remove"></i>{{/if}}
+                                        {{#if onCart}}<i class="icon-ok"></i>{{else}}<i class="icon-remove"></i>{{/if}}
                                         <span class="attributeTitle"><strong>On Etsy:</strong></span>
-                                        {{#if onEtsy}}<i class="icon-ok"></i>{{else}}}<i class="icon-remove"></i>{{/if}}
+                                        {{#if onEtsy}}<i class="icon-ok"></i>{{else}}<i class="icon-remove"></i>{{/if}}
                                         <span class="attributeTitle"><strong>At SOWA:</strong></span>
-                                        {{#if onSowa}}<i class="icon-ok"></i>{{else}}}<i class="icon-remove"></i>{{/if}}</div>
+                                        {{#if onSowa}}<i class="icon-ok"></i>{{else}}<i class="icon-remove"></i>{{/if}}</div>
                                     <div class="attributeEdit-{{_id}} hidden">
                                         <div class="block">
                                             <label class="chcekbox inline">On Cart
@@ -131,7 +131,7 @@
                                 <div class="attribute">
                                     <span class="attributeTitle"><strong>Cost:</strong></span>
                                     <div class="attributeContent-{{_id}}">{{cost}}</div>
-                                    <div class="attributeEdit-{{_id}} hidden"><input name="cost" class="itemEditAttribute-{{_id}}" onchange="Item.calculateMargin('{{_id}}}');" type="text" value="{{cost}}"/></div>
+                                    <div class="attributeEdit-{{_id}} hidden"><input name="cost" class="itemEditAttribute-{{_id}}" onchange="Item.calculateMargin('{{_id}}');" type="text" value="{{cost}}"/></div>
                                 </div>
                                 <div class="attribute">
                                     <span class="attributeTitle"><strong>Asking Price:</strong></span>

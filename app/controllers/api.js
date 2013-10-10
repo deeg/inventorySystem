@@ -1,5 +1,5 @@
 var _ = require('underscore'),
-    Items = require('../models/item')();
+    Items = require('../models/item');
 
 module.exports = function (app) {
     var controller = {};

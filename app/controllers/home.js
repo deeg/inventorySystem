@@ -1,5 +1,6 @@
 var _ = require('underscore'),
    fs = require('fs');
+   Items = require('../models/item.js');
 
 module.exports = function (app) {
     return {
@@ -15,7 +16,7 @@ module.exports = function (app) {
         inventory:[
             function (req, res, next) {
                 res.locals.title = 'Inventory';
-                app.models.item.find({}, function(err, items){
+                Items.find({}, function(err, items){
                     //Sort by item ID
                     items = _.sortBy(items, function(e){return e.itemId});
                     res.locals.items = items;
@@ -33,7 +34,7 @@ module.exports = function (app) {
         inventorySoldOut:[
             function (req, res, next) {
                 res.locals.title = 'Inventory Sold';
-                app.models.item.find({soldOut:true}, function(err, items){
+                Items.find({soldOut:true}, function(err, items){
                     items = _.sortBy(items, function(e){return e.itemId});
                     res.locals.items = items;
                     next();
@@ -43,7 +44,7 @@ module.exports = function (app) {
         inventoryForSale:[
             function (req, res, next) {
                 res.locals.title = 'Inventory Sold';
-                app.models.item.find({soldOut:false}, function(err, items){
+                Items.find({soldOut:false}, function(err, items){
                     items = _.sortBy(items, function(e){return e.itemId});
                     res.locals.items = items;
                     next();
@@ -53,7 +54,7 @@ module.exports = function (app) {
         inventoryOnCart:[
             function (req, res, next) {
                 res.locals.title = 'Inventory Sold';
-                app.models.item.find({onCart:true}, function(err, items){
+                Items.find({onCart:true}, function(err, items){
                     items = _.sortBy(items, function(e){return e.itemId});
                     res.locals.items = items;
                     next();
@@ -64,7 +65,7 @@ module.exports = function (app) {
         inventoryOnEtsy:[
             function (req, res, next) {
                 res.locals.title = 'Inventory Sold';
-                app.models.item.find({onEtsy:true}, function(err, items){
+                Items.find({onEtsy:true}, function(err, items){
                     items = _.sortBy(items, function(e){return e.itemId});
                     res.locals.items = items;
                     next();
@@ -75,7 +76,7 @@ module.exports = function (app) {
         inventoryAtSowa:[
             function (req, res, next) {
                 res.locals.title = 'Inventory Sold';
-                app.models.item.find({onSowa:true}, function(err, items){
+                Items.find({onSowa:true}, function(err, items){
                     items = _.sortBy(items, function(e){return e.itemId});
                     res.locals.items = items;
                     next();
@@ -90,7 +91,7 @@ module.exports = function (app) {
                 if(req.body){
                     params = req.body;
                 }
-                app.models.item.find(params, function(err, items){
+                Items.find(params, function(err, items){
                     res.locals.items = items;
                     next();
                 });
@@ -103,7 +104,7 @@ module.exports = function (app) {
                 var queryParams = {};
                 queryParams._id = _id;
                 res.locals.title = 'Inventory Added';
-                app.models.item.find(queryParams, function(err, items){
+                Items.find(queryParams, function(err, items){
                     res.locals.items = items;
                     res.locals.success = true;
                     res.locals.successType = 'added';
@@ -117,7 +118,7 @@ module.exports = function (app) {
                 var queryParams = {};
                 queryParams._id = _id;
                 res.locals.title = 'Inventory Updated';
-                app.models.item.find(queryParams, function(err, items){
+                Items.find(queryParams, function(err, items){
                     res.locals.items = items;
                     res.locals.success = true;
                     res.locals.successType = 'updated';
@@ -131,7 +132,7 @@ module.exports = function (app) {
                 var queryParams = {};
                 queryParams.$or = ids;
                 res.locals.title = 'Labels';
-                app.models.item.find(queryParams, function(err, items){
+                Items.find(queryParams, function(err, items){
                     res.locals.items = items;
                     res.json(items);
                 })

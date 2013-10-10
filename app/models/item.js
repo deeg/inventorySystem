@@ -1,7 +1,7 @@
 var mongoose = require('mongoose'),
     _ = require('underscore');
 
-module.exports = function (app) {
+
     var ItemSchema = new mongoose.Schema({
         itemId:{type:Number, required:true, unique:true},
         type:{type:String, required:true},
@@ -31,7 +31,5 @@ module.exports = function (app) {
         qrCode: String
     })
 
-    var Items =  mongoose.model('items', ItemSchema);
+    module.exports = mongoose.model('items', ItemSchema);
 
-    return Items;
-}

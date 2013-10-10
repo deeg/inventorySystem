@@ -2,8 +2,8 @@ var passport = require('passport'),
     fs = require('fs'),
     _ = require('underscore');
     LocalStrategy = require('passport-local').Strategy,
-    Users = require('../models/user')();
-    Items = require('../models/item')();
+    Users = require('../models/user');
+    Items = require('../models/item');
 
 module.exports = function (app) {
 
